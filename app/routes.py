@@ -15,7 +15,7 @@ def login():
     if not current_user.is_authenticated:
         if form.validate_on_submit():
             user = form.username.data
-            password = form.username.data
+            password = form.password.data
             u = User.query.filter_by(username=user).first()
             if u.check_password(password):
                 flash('Success')
@@ -54,4 +54,16 @@ def register():
         flash('Success, you can login now')
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
+
+
+@app.route('/users/<user>')
+def user_page(user):
+    isAdmin = False
+    u = User.query.filter_by(username=user).first()
+    if u is None:
+        return '<h1>No such user, 404 soon</h1>'
+    if current_user.username == 'admin' and u.username == 'admin':
+        isAdmin = True
+    return render_template('user_page.html', user=u, admin=isAdmin)
+
     

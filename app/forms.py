@@ -16,11 +16,13 @@ class RegisterForm(FlaskForm):
     email = StringField('email', validators=[DataRequired(), Email()])
     submit = SubmitField('register')
 
-    # def validate_username(self, username):
-    #     if User.query.filter_by(username=username).first() is not None:
-    #         raise ValidationError('Use diffrent username')
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        if user is not None:
+            raise ValidationError('Use diffrent username')
 
     
-    # def validate_email(self, email):
-    #     if User.query.filter_by(email=email).first() is not None:
-    #         raise ValidationError('Email already used')
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user is not None:
+            raise ValidationError('Email already used')

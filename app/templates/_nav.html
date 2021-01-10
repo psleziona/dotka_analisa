@@ -2,7 +2,7 @@
     <ul>
         <li><a href="{{ url_for('index') }}">Home page</a></li>
         {% if current_user.is_authenticated %}
-        <li><a href=""></a>Profil</li>
+        <li><a href="{{url_for('user_page', user=current_user.username )}}">Profil</a></li>
         <li><a href="{{ url_for('logout') }}">Wyloguj</a></li>
         {% else %}
         <li><a href="{{ url_for('login') }}">Zaloguj</a></li>
