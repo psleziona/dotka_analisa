@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Login page{% endblock %}
+{% block content %}
+{% with messages = get_flashed_messages() %}
+    {% for msg in messages %}
+    <span>{{ msg }}</span>
+    {% endfor %}
+{% endwith %}
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        {{ form.username.label }}
+        {{ form.username() }}
+        {{ form.password.label }}
+        {{ form.password() }}
+        {{ form.submit() }}
+    </form>
+{% endblock %}
